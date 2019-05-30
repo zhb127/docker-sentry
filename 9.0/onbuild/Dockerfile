@@ -6,9 +6,9 @@ WORKDIR /usr/src/sentry
 ENV PYTHONPATH /usr/src/sentry
 ONBUILD COPY . /usr/src/sentry
 
-ONBUILD RUN sudo sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
-    && sudo sed -i 's/security.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
-    && sudo apt-get update
+ONBUILD RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
+    && sed -i 's/security.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
+    && apt-get update
 
 # Hook for installing additional apt-get requirements for plugins
 ONBUILD RUN if [ -s requirements.system ] && grep -vq "^#" < requirements.system; then apt-get update \
